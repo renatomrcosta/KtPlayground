@@ -1,6 +1,6 @@
 package i_testing_coroutines
 
-import oldcop.iii_concurrency.calculateBananasForAReallyLongTime
+import coroutines.basics.iii_concurrency.calculateBananasForAReallyLongTime
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import kotlinx.coroutines.TimeoutCancellationException
