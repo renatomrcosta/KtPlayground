@@ -21,6 +21,8 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${coroutines_version}"
 
+    implementation "io.reactivex.rxjava2:rxjava:2.2.14"
+
     testImplementation "io.kotest:kotest-runner-junit5-jvm:${kotest_version}"
     testImplementation "io.kotest:kotest-assertions-core-jvm:${kotest_version}"
     testImplementation "io.kotest:kotest-property-jvm:${kotest_version}"
