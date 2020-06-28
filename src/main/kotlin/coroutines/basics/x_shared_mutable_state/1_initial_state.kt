@@ -13,7 +13,7 @@ CONTEXT: Suppose Jimdo has a campaign that if a Jimdo Website refers a Jimdo par
  */
 
 private const val VALUE_PER_WEBSITE_VISIT = 10
-private const val WEBSITE_VISIT_QUANTITY = 4000
+private const val WEBSITE_VISIT_QUANTITY = 4_000
 
 private var totalCampaignAmount = 0
 
