@@ -19,7 +19,7 @@ fun main() {
     withExecutionTime {
         runBlocking {
             myFlow()
-                .conflate()
+                .conflate() // Gets always the latest value
                 .collect {
                     delay(500)
                     println("Collecting $it")

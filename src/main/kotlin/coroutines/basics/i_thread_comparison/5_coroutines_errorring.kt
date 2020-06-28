@@ -1,15 +1,15 @@
 package coroutines.basics.i_thread_comparison
 
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.supervisorScope
 import util.withExecutionTime
 
 fun main() =
     withExecutionTime {
         runBlocking {
-            supervisorScope {
+            coroutineScope {
                 List(10) {
                     launch {
                         delay(1000)
