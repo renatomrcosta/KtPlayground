@@ -11,7 +11,7 @@ fun main() = withExecutionTime {
     runBlocking(Dispatchers.Default) {
         repeat(100) {
             launch {
-                val worker = SuspendingMeasurementWorker {
+                val worker = SuspendingWorker {
                     trace("work block start")
                     delay(1000)
                     trace("work block finish")

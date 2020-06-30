@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger
 
 abstract class Worker : Runnable
 
-class BlockingMeasurementWorker(
+class BlockingWorker(
     private val fn: () -> Unit
 ) : Worker() {
     override fun run() {
@@ -19,7 +19,7 @@ class BlockingMeasurementWorker(
     }
 }
 
-class SuspendingMeasurementWorker(
+class SuspendingWorker(
     private val fn: suspend () -> Unit
 ) {
     suspend fun run() = coroutineScope {

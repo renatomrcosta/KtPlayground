@@ -7,7 +7,7 @@ import util.trace
 import util.withExecutionTime
 
 fun main() = withExecutionTime {
-    val worker = BlockingMeasurementWorker {
+    val worker = BlockingWorker {
         trace("work block start")
         runBlocking(Dispatchers.Default) {
             repeat(100) {

@@ -10,7 +10,7 @@ fun main() = withExecutionTime {
     runBlocking {
         repeat(100) {
             launch {
-                val worker = SuspendingMeasurementWorker {
+                val worker = SuspendingWorker {
                     trace("work block start")
                     delay(1000)
                     trace("work block finish")
