@@ -1,13 +1,11 @@
-package coroutines.devcop.sharedState
+package coroutines.devcop.x_sharedState
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.buffer
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import util.withExecutionTime
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 /*
 CONTEXT: Suppose Jimdo has a campaign that if a Jimdo Website refers a Jimdo partner via a link,
@@ -25,30 +23,21 @@ private const val VALUE_PER_WEBSITE_VISIT_IN_CENTS = 10
 private const val WEBSITE_VISIT_QUANTITY = 4000
 
 private suspend fun isClickValid(): Boolean {
-    println("Checking validity")
-    delay(10)
+    delay(150)
     return true
 }
 
-private fun valueEmissionFlow() = flow<Int> {
-    repeat(WEBSITE_VISIT_QUANTITY) {
-        println("Value Emission $it")
-        emit(VALUE_PER_WEBSITE_VISIT_IN_CENTS)
-    }
-}
-
 fun main() {
-    withExecutionTime {
-        runBlocking(context = Dispatchers.Default) {
-            var total = 0
-            val valueFlow = valueEmissionFlow()
-                .buffer(100)
-                .filter { isClickValid() }
-                .collect {
-                    total += it
+    var totalCampaignAmount = 0
+    val campaignAmountMutex = Mutex()
+    runBlocking(context = Dispatchers.Default) {
+        repeat(WEBSITE_VISIT_QUANTITY) {
+            launch {
+                if (isClickValid()) campaignAmountMutex.withLock {
+                    totalCampaignAmount += VALUE_PER_WEBSITE_VISIT_IN_CENTS
                 }
-            println("Total: $total")
+            }
         }
     }
+    println(totalCampaignAmount)
 }
-

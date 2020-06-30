@@ -1,4 +1,4 @@
-package coroutines.devcop.intro
+package coroutines.devcop.i_intro
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

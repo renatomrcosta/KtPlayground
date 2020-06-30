@@ -1,9 +1,10 @@
-package coroutines.devcop.sharedState
+package coroutines.devcop.x_sharedState
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.concurrent.atomic.AtomicInteger
 
 /*
 CONTEXT: Suppose Jimdo has a campaign that if a Jimdo Website refers a Jimdo partner via a link,
@@ -26,12 +27,12 @@ private suspend fun isClickValid(): Boolean {
 }
 
 fun main() {
-    var totalCampaignAmount = 0
+    val totalCampaignAmount = AtomicInteger(0)
     runBlocking(context = Dispatchers.Default) {
         repeat(WEBSITE_VISIT_QUANTITY) {
             launch {
                 if (isClickValid()) {
-                    totalCampaignAmount += VALUE_PER_WEBSITE_VISIT_IN_CENTS
+                    totalCampaignAmount.addAndGet(VALUE_PER_WEBSITE_VISIT_IN_CENTS)
                 }
             }
         }

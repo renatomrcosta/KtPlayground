@@ -1,11 +1,9 @@
-package coroutines.devcop.sharedState
+package coroutines.devcop.x_sharedState
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 
 /*
 CONTEXT: Suppose Jimdo has a campaign that if a Jimdo Website refers a Jimdo partner via a link,
@@ -29,11 +27,10 @@ private suspend fun isClickValid(): Boolean {
 
 fun main() {
     var totalCampaignAmount = 0
-    val campaignAmountMutex = Mutex()
     runBlocking(context = Dispatchers.Default) {
         repeat(WEBSITE_VISIT_QUANTITY) {
             launch {
-                if (isClickValid()) campaignAmountMutex.withLock {
+                if (isClickValid()) {
                     totalCampaignAmount += VALUE_PER_WEBSITE_VISIT_IN_CENTS
                 }
             }
