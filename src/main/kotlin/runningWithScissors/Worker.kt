@@ -19,6 +19,23 @@ class BlockingWorker(
     }
 }
 
+class BlockingEternalWorker(
+    private val fn: () -> Unit
+) {
+    private val executionCounter = AtomicInteger(0)
+    fun run() {
+        try {
+            trace("Starting ETERNAL Worker Run")
+            while (true) {
+                fn()
+                executionCounter.getAndAdd(1)
+            }
+        } finally {
+            trace("Finishing Blocking ETERNAL Worker Run || Executed $executionCounter times")
+        }
+    }
+}
+
 class SuspendingWorker(
     private val fn: suspend () -> Unit
 ) {
@@ -41,7 +58,7 @@ class SuspendingEternalWorker(
                 executionCounter.getAndAdd(1)
             }
         } finally {
-            trace("Finishing Eternal Worker Run -> Executed $executionCounter times")
+            trace("Finishing Eternal Worker Run || Executed $executionCounter times")
         }
     }
 }
