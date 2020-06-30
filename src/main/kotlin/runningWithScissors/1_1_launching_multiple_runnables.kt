@@ -7,7 +7,7 @@ import util.withExecutionTime
 
 fun main() = withExecutionTime {
     runBlocking {
-        repeat(10) {
+        repeat(100) {
             launch {
                 val worker = BlockingMeasurementWorker {
                     trace("work block start")

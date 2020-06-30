@@ -13,7 +13,7 @@ fun main() = withExecutionTime {
             launch {
                 val worker = SuspendingMeasurementWorker {
                     trace("work block start")
-                    delay(1_000)
+                    delay(1000)
                     trace("work block finish")
                 }
                 worker.run()
