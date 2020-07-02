@@ -23,7 +23,7 @@ fun main() = withExecutionTime {
 
             }
             trace("Repeat block is over")
-            delay(5_000)
+            delay(5_100)
             trace("Cancelling all running jobs")
             this.cancel("Job is done!")
         }

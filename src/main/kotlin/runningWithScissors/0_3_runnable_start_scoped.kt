@@ -9,7 +9,7 @@ import util.withExecutionTime
 fun main() = withExecutionTime {
     val worker = BlockingWorker {
         trace("work block start")
-        runBlocking(Dispatchers.Default) {
+        runBlocking(Dispatchers.IO) {
             repeat(100) {
                 launch {
                     trace("coroutine block starting")

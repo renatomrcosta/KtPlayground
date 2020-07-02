@@ -21,9 +21,9 @@ class BlockingWorker(
 
 class BlockingEternalWorker(
     private val fn: () -> Unit
-) {
+) : Worker() {
     private val executionCounter = AtomicInteger(0)
-    fun run() {
+    override fun run() {
         try {
             trace("Starting ETERNAL Worker Run")
             while (true) {

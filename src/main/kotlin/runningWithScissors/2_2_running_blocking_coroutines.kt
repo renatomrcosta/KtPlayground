@@ -7,7 +7,7 @@ import util.trace
 import util.withExecutionTime
 
 fun main() = withExecutionTime {
-    runBlocking(Dispatchers.Default) {
+    runBlocking(Dispatchers.IO) {
         repeat(100) {
             launch {
                 val worker = SuspendingWorker {

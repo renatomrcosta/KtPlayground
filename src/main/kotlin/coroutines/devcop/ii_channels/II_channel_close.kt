@@ -21,6 +21,7 @@ fun main() = withExecutionTime {
         for (item in channel) {
             println(item)
         }
+        channel.close()
         println("done!")
     }
 }

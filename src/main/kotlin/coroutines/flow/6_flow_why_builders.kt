@@ -32,6 +32,7 @@ fun main() {
 
             listOf(1, 2, 3)
                 .asFlow()
+                // .buffer()
                 .map {
                     println("mapping flow value $it")
                     it.toMyWeirdDTO()
