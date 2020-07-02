@@ -9,7 +9,7 @@ import util.withExecutionTime
 
 private fun myFlow() = flow<Int> {
     for (i in 1..5) {
-        delay(250)
+        delay(100)
         println("Emitting $i")
         emit(i)
     }
@@ -21,7 +21,7 @@ fun main() {
             myFlow()
                 .buffer()
                 .collect {
-                    delay(500)
+                    delay(100)
                     println("Collecting $it")
                 }
         }

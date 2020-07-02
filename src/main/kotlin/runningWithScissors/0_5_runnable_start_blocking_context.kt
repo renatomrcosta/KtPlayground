@@ -14,7 +14,7 @@ fun main() = withExecutionTime {
             repeat(100) {
                 launch {
                     trace("coroutine block starting")
-                    withContext(Dispatchers.IO) { Thread.sleep(1000) }
+                    withContext(Dispatchers.IO) { Thread.sleep(10_000) }
                     trace("coroutine block finishing")
                 }
             }
