@@ -9,6 +9,7 @@ import util.withExecutionTime
 fun main() = withExecutionTime {
     runBlocking {
         val channel = Channel<Int>()
+
         launch {
             for (x in 1..5) {
                 println("Sending value $x")
@@ -17,9 +18,13 @@ fun main() = withExecutionTime {
                 println("Value $x sent")
             }
         }
+
         println("Launched channel")
-        for (item in channel) {
-            println(item)
+        launch {
+            println("Receiving values from channel")
+            for (item in channel) {
+                println(item)
+            }
         }
         println("done!")
     }

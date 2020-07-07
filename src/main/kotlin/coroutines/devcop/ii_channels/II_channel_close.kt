@@ -16,12 +16,15 @@ fun main() = withExecutionTime {
                 channel.send(x * x)
                 println("Value $x sent")
             }
+            channel.close()
         }
         println("Launched channel")
-        for (item in channel) {
-            println(item)
+        launch {
+            println("Receiving values from channel")
+            for (item in channel) {
+                println(item)
+            }
         }
-        channel.close()
         println("done!")
     }
 }
