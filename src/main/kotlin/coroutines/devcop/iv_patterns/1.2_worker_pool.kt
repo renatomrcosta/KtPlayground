@@ -40,28 +40,34 @@ private class WorkerPool<T, U>(
 
 private data class Worker<T>(val id: Int, val value: T)
 
+private suspend fun doSquare(value: Int): Int = coroutineScope {
+    delay(100)
+    value * value
+}
+
 fun main() =
     runBlocking<Unit>(Dispatchers.IO) {
         val channel = Channel<Int>()
+        val pool = WorkerPool<Int, Int>(channel)
+
+        launch {
+            trace("Launching Workers")
+            pool.launchWorkers(4) { worker ->
+                val result = doSquare(worker.value)
+                trace("WORKERID: ${worker.id} || Result $result")
+                result
+            }
+            trace(" ALL Workers Launched")
+        }
+
         launch {
             for (i in 1..1_000) {
                 channel.send(i)
             }
             channel.close()
         }
-
-        launch {
-            trace("Launching Workers")
-            val pool = WorkerPool<Int, Int>(channel)
-            pool.launchWorkers(60) { worker ->
-                delay(100)
-                trace("WORKERID: ${worker.id} Work done on ${worker.value}")
-                worker.value * worker.value
-            }
-            trace("Workers Launched")
-            pool.outputFlow.collect {
-                trace("Value $it printed!")
-            }
+        pool.outputFlow.collect {
+            trace("Value $it printed!")
         }
     }
 
