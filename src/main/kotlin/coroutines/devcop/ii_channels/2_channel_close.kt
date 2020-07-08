@@ -4,28 +4,32 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import util.trace
 import util.withExecutionTime
 
 fun main() = withExecutionTime {
     runBlocking {
         val channel = Channel<Int>()
 
+        trace("Sending values")
         launch {
             for (x in 1..5) {
-                println("Sending value $x")
+                trace("Sending value $x")
                 delay(100)
                 channel.send(x * x)
-                println("Value $x sent")
+                trace("Value $x sent")
+            }
+            channel.close()
+        }
+
+        trace("Receiving Values")
+        launch {
+            trace("Receiving values from channel")
+            for (item in channel) {
+                trace(item)
             }
         }
 
-        println("Launched channel")
-        launch {
-            println("Receiving values from channel")
-            for (item in channel) {
-                println(item)
-            }
-        }
-        println("done!")
+        trace("done!")
     }
 }

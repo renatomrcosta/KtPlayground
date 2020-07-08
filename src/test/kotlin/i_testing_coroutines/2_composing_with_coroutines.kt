@@ -5,8 +5,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeout
 
 class ComposingWithCoroutinesTest : DescribeSpec() {
@@ -23,12 +22,14 @@ class ComposingWithCoroutinesTest : DescribeSpec() {
 
         describe("Suspending function test composition scenario") {
             coroutineScope {
-                (1..10).asFlow().map {
-                    val timeout = it * 500L
-                    it("should time-out in ${timeout}ms!") {
-                        shouldThrow<TimeoutCancellationException> {
-                            withTimeout(timeout) {
-                                calculateBananasForAReallyLongTime()
+                (1..10).map {
+                    launch {
+                        val timeout = it * 500L
+                        it("should time-out in ${timeout}ms!") {
+                            shouldThrow<TimeoutCancellationException> {
+                                withTimeout(timeout) {
+                                    calculateBananasForAReallyLongTime()
+                                }
                             }
                         }
                     }

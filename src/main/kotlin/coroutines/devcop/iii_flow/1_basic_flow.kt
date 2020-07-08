@@ -1,4 +1,4 @@
-package coroutines.flow
+package coroutines.devcop.iii_flow
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -8,7 +8,7 @@ import kotlinx.coroutines.runBlocking
 import util.trace
 
 private fun myFlow(): Flow<Int> = flow {
-    println("Flow has started")
+    trace("Flow has started")
     for (i in 1..3) {
         delay(100)
         trace("emitting index $i")
