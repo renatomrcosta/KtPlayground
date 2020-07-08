@@ -16,7 +16,7 @@ import util.trace
 private class WorkerPool<T, U>(
     private val inputChannel: ReceiveChannel<T>
 ) {
-    private val outputList: MutableList<U> = emptyList<U>().toMutableList()
+    private val outputList: MutableList<U> = mutableListOf()
     val outputFlow: Flow<U> = outputList.asFlow()
 
     suspend fun launchWorkers(amountOfWorkers: Int, work: suspend (Worker<T>) -> U) = coroutineScope {
