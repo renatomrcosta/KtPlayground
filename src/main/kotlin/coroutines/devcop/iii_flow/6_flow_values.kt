@@ -8,24 +8,16 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import util.client.singletonHttpWorkClient
 import util.trace
 import util.withExecutionTime
-import kotlin.random.Random
-
-private val RNGesus = Random(42L)
-
-private suspend fun getValueFromAnotherService(id: Int): Int = withContext(Dispatchers.IO) {
-    Thread.sleep(RNGesus.nextLong(10, 200))
-    id * id
-}
 
 private fun myFlow(): Flow<Int> = flow {
     trace("Flow has started")
     for (i in 1..1000) {
-        val result = getValueFromAnotherService(i)
-        trace("Executed Job #$i | Result: $result")
-        emit(result)
+        val value = singletonHttpWorkClient.getValue()
+        trace("Executed Job #$i | Result: $value")
+        emit(value)
     }
 }.flowOn(Dispatchers.Default)
 

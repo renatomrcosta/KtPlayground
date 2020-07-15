@@ -1,9 +1,9 @@
 package coroutines.devcop.ii_channels
 
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import util.client.singletonHttpWorkClient
 import util.trace
 import util.withExecutionTime
 
@@ -14,10 +14,11 @@ fun main() = withExecutionTime {
         trace("Sending values")
         launch {
             for (x in 1..5) {
-                trace("Sending value $x")
-                delay(100)
-                channel.send(x * x)
-                trace("Value $x sent")
+                trace("Getting a value from a remote service")
+                val value = singletonHttpWorkClient.getValue()
+                trace("Sending value $value")
+                channel.send(value)
+                trace("Value $value sent")
             }
         }
 

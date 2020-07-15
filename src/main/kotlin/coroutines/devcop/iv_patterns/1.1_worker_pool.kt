@@ -7,12 +7,13 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import util.client.singletonHttpWorkClient
 import util.trace
 import util.withExecutionTime
 
 private suspend fun doWork(workerId: Int, value: Int) = coroutineScope {
     trace("Worker $workerId -> Starting work with value $value")
-    delay(1000)
+    singletonHttpWorkClient.doRemoteWork(1000)
     trace("Worker $workerId -> Ending work with value $value")
 }
 

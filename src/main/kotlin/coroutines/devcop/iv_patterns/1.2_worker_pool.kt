@@ -5,12 +5,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import util.client.singletonHttpWorkClient
 import util.trace
 
 private class WorkerPool<T, U>(
@@ -41,7 +41,7 @@ private class WorkerPool<T, U>(
 private data class Worker<T>(val id: Int, val value: T)
 
 private suspend fun doSquare(value: Int): Int = coroutineScope {
-    delay(100)
+    singletonHttpWorkClient.doRemoteWork(100)
     value * value
 }
 

@@ -5,6 +5,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import util.client.singletonHttpWorkClient
 import util.trace
 import util.withExecutionTime
 import kotlin.random.Random
@@ -12,8 +13,7 @@ import kotlin.random.Random
 private val RNGesus = Random(42L)
 
 private suspend fun getValueFromAnotherService(id: Int): Int = withContext(Dispatchers.IO) {
-    Thread.sleep(RNGesus.nextLong(10, 200))
-    id * id
+    singletonHttpWorkClient.doRemoteCounting(150)
 }
 
 fun main() = withExecutionTime {
