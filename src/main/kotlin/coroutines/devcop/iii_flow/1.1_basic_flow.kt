@@ -12,7 +12,7 @@ private fun myFlow(): Flow<Int> = flow {
     for (i in 1..3) {
         val value = singletonHttpWorkClient.getValue()
         trace("emitting value $value")
-        emit(i)
+        emit(value)
     }
 }
 
@@ -21,8 +21,8 @@ fun main() = runBlocking<Unit> {
     val flow = myFlow()
 
     trace("Calling the Flow collect")
-    flow.collect { trace(it) }
+    flow.collect { trace("Collected value $it") }
 
     trace("Calling the Flow collect AGAIN")
-    flow.collect { trace(it) }
+    flow.collect { trace("Collected value $it") }
 }

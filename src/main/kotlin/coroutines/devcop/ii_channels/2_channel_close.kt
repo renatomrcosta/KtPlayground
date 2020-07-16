@@ -27,7 +27,7 @@ fun main() = withExecutionTime {
         launch {
             trace("Receiving values from channel")
             for (item in channel) {
-                trace(item)
+                trace("Received $item")
             }
         }
 

@@ -8,9 +8,6 @@ import kotlinx.coroutines.withContext
 import util.client.singletonHttpWorkClient
 import util.trace
 import util.withExecutionTime
-import kotlin.random.Random
-
-private val RNGesus = Random(42L)
 
 private suspend fun getValueFromAnotherService(id: Int): Int = withContext(Dispatchers.IO) {
     singletonHttpWorkClient.doRemoteCounting(150)
