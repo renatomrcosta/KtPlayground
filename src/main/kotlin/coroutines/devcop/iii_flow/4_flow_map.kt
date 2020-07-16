@@ -3,6 +3,7 @@ package coroutines.devcop.iii_flow
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
@@ -35,12 +36,12 @@ fun main() {
             trace("FLOWS GO HERE NOW")
             (1..5)
                 .asFlow()
-                // .buffer()
+                .buffer()
                 .map {
                     trace("mapping flow value $it")
                     it.toMyWeirdDTO()
                 }
-                // .buffer()
+                .buffer()
                 .collect {
                     trace(it)
                 }
