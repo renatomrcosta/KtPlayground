@@ -10,7 +10,7 @@ import util.trace
 import util.withExecutionTime
 
 private suspend fun getValueFromAnotherService(id: Int): Int = withContext(Dispatchers.IO) {
-    singletonHttpWorkClient.doRemoteCounting(150)
+    singletonHttpWorkClient.getValue()
 }
 
 fun main() = withExecutionTime {
