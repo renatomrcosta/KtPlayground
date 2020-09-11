@@ -1,9 +1,10 @@
 package coroutines.basics.iv_context
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
+import java.util.concurrent.Executors
 
 fun main() = runBlocking<Unit> {
     launch {
@@ -18,7 +19,7 @@ fun main() = runBlocking<Unit> {
     launch(Dispatchers.IO) {
         println("IO Dispatcher: Thread Name: ${getThreadName()}")
     }
-    launch(newSingleThreadContext("Banana ThreadContext")) {
+    launch(Executors.newSingleThreadExecutor().asCoroutineDispatcher()) {
         println("New thread Context: Thread Name: ${getThreadName()}")
     }
 }
