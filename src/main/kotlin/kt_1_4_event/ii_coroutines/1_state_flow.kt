@@ -29,10 +29,11 @@ class DownloadModel {
     val state: StateFlow<DownloadProgress> get() = _state
 
     suspend fun download() {
-        _state.compareAndSet(INITIAL_STATE, DownloadProgress(status = DownloadStatus.IN_PROGRESS))
-        initializeConnection()
-        transferTheFile()
-        _state.value = DownloadProgress(status = DownloadStatus.FINISHED, percentComplete = 100.0)
+        if (_state.compareAndSet(INITIAL_STATE, DownloadProgress(status = DownloadStatus.IN_PROGRESS))) {
+            initializeConnection()
+            transferTheFile()
+            _state.value = DownloadProgress(status = DownloadStatus.FINISHED, percentComplete = 100.0)
+        }
     }
 
     private suspend fun transferTheFile() {
