@@ -1,7 +1,6 @@
 package kt_1_4_event.ii_coroutines
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collect
@@ -11,7 +10,6 @@ import util.trace
 import java.util.UUID
 import kotlin.random.Random
 
-@ExperimentalCoroutinesApi
 private suspend fun startSubscriber(
     flow: SharedFlow<Event>,
     id: String,
@@ -31,7 +29,6 @@ private sealed class Event {
     data class PaidEvent(override val eventId: String, val valuePaid: Double) : Event()
 }
 
-@ExperimentalCoroutinesApi
 private class EventBus {
     private val _events = MutableSharedFlow<Event>(replay = 100, extraBufferCapacity = 100)
     val events: SharedFlow<Event> get() = _events
@@ -41,7 +38,6 @@ private class EventBus {
 
 private val RNGesus = Random(System.currentTimeMillis())
 
-@ExperimentalCoroutinesApi
 fun main() = runBlocking<Unit> {
     val eventBus = EventBus()
 

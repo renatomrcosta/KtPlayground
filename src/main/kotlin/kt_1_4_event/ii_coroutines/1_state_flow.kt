@@ -1,6 +1,5 @@
 package kt_1_4_event.ii_coroutines
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +20,6 @@ enum class DownloadStatus {
     FINISHED
 }
 
-@ExperimentalCoroutinesApi
 class DownloadModel {
     private val _state = MutableStateFlow(
         INITIAL_STATE
@@ -51,7 +49,6 @@ class DownloadModel {
     }
 }
 
-@ExperimentalCoroutinesApi
 fun main() = runBlocking<Unit> {
     val model = DownloadModel()
     launch {
