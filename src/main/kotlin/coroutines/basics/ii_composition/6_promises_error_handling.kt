@@ -8,7 +8,7 @@ import java.util.concurrent.CompletableFuture
 private fun fetchUsageInformation(websiteId: String): CompletableFuture<String> =
     CompletableFuture.supplyAsync {
         Thread.sleep(100)
-        "Imagine some meaninful content we derive based on a website"
+        "Imagine some meaningful content we derive based on a website"
     }
 
 private fun fetchCurrentWebsiteVersion(websiteId: String): CompletableFuture<Int> =

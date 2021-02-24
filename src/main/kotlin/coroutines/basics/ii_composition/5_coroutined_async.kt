@@ -10,7 +10,7 @@ import util.withExecutionTime
 private suspend fun fetchUsageInformation(websiteId: String): String = coroutineScope {
     println("Welcome to my nice function!")
     delay(100)
-    "Imagine some meaninful content we derive based on a website"
+    "Imagine some meaningful content we derive based on a website"
 }
 
 private suspend fun fetchCurrentWebsiteVersion(websiteId: String): Int = coroutineScope {

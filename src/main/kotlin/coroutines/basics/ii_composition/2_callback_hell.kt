@@ -6,7 +6,7 @@ import util.withExecutionTime
 
 private fun <T> fetchUsageInformation(websiteId: String, onComplete: (String) -> T) {
     Thread.sleep(100)
-    onComplete("Imagine some meaninful content we derive based on a website")
+    onComplete("Imagine some meaningful content we derive based on a website")
 }
 
 private fun <T> fetchCurrentWebsiteVersion(websiteId: String, onComplete: (Int) -> T) {

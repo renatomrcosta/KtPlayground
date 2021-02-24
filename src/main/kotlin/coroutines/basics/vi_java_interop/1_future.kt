@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture
 private suspend fun fetchUsageInformation(websiteId: String): CompletableFuture<String> = coroutineScope {
     future {
         delay(100)
-        "Imagine some meaninful content we derive based on a website"
+        "Imagine some meaningful content we derive based on a website"
     }
 }
 
