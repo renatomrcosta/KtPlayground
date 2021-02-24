@@ -29,5 +29,5 @@ Also some tests exploring use cases for coroutines also exist using kotest.
 
 If you've attended one of my talks and found your way to this Repo, you can also find the slides linked below:
 
-- Coroutines - A practical approach (English): [LINK](https://drive.google.com/file/d/1-9lAQ8l_BovYUrq6ViMP4zLyZh-ArWCc/view?usp=sharing)
+- Coroutines - A practical approach (English): [LINK](https://docs.google.com/presentation/d/1jhCZNIHdteSs5gt1pJsI1AxdTtZ6TJNiu2G0rrhgKjM/edit?usp=sharing)
 - Coroutines em Prática (Português do Brasil): [LINK](https://docs.google.com/presentation/d/1wmCXPintYTt_QzDHAQ6ri3aYjTc0bbAr2H2kanqAyjY/edit?usp=sharing)
