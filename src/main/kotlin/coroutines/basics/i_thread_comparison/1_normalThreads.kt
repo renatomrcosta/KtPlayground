@@ -13,7 +13,7 @@ fun main() {
                 Thread.sleep(1000)
                 trace("Executed Thread #$it")
             }
-        }.forEach {
+        }.onEach {
             // Wait until the thread spawned is done working before proceeding
             it.join()
         }
