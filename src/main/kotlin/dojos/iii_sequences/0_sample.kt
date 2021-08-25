@@ -20,7 +20,7 @@ fun main() {
                 Thread.sleep(100)
                 it.toMyDto()
             }
-            .find { it.id >= 200 }
+            .find { it.id >= 400 }
 
         println(result)
     }
@@ -28,7 +28,7 @@ fun main() {
     withExecutionTime {
         println("Operating with sequences")
 
-        val result = (1..10).asSequence()
+        val result = (1..10).toList().asSequence()
             .filter {
                 println("filtering value $it")
                 it % 2 == 0
@@ -38,9 +38,10 @@ fun main() {
                 Thread.sleep(100)
                 it.toMyDto()
             }
-            .find { it.id >= 200 }
+            .find { it.id >= 400 }
+
+
 
         println(result)
     }
 }
-
