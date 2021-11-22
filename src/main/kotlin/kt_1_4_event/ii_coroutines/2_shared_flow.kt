@@ -13,7 +13,7 @@ import kotlin.random.Random
 private suspend fun startSubscriber(
     flow: SharedFlow<Event>,
     id: String,
-) =
+): Unit =
     flow
         .collect { event ->
             when (event) {
