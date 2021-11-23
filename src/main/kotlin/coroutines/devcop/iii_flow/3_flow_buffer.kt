@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import util.client.singletonHttpWorkClient
+import util.client.WorkClient
 import util.trace
 import util.withExecutionTime
 
 private fun myFlow(): Flow<Int> = flow {
     repeat(3) {
-        val value = singletonHttpWorkClient.getValue()
+        val value = WorkClient.getValue()
         emit(value)
     }
 }

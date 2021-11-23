@@ -6,13 +6,13 @@ import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import util.client.singletonHttpWorkClient
+import util.client.WorkClient
 import util.trace
 import util.withExecutionTime
 
 private suspend fun sendValue(channel: SendChannel<Int>) = coroutineScope {
     trace("Getting a value from a remote service")
-    val value = singletonHttpWorkClient.getValue()
+    val value = WorkClient.getValue()
     trace("Got value $value")
     channel.send(value)
     trace("Value $value sent")

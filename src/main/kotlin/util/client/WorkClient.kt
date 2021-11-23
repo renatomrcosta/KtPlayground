@@ -1,16 +1,20 @@
 package util.client
 
-import kotlinx.coroutines.delay
+import util.withDelay
+import kotlin.random.Random
+import kotlin.random.nextInt
 
-val singletonHttpWorkClient = WorkClient()
-
-class WorkClient {
+object WorkClient {
+    private val random = Random(System.currentTimeMillis())
+    private val numberRange = (0..10_000)
 
     suspend fun doRemoteWork(millis: Long): Unit =
-        delay(millis)
+        withDelay(millis) {}
 
     suspend fun doRemoteCounting(millis: Long): Int =
-        delay(millis).run { 0 }
+        withDelay(millis) { random.nextInt(numberRange) }
 
-    suspend fun getValue(): Int = 0
+    suspend fun getValue(): Int = withDelay { random.nextInt(numberRange) }
+
 }
+

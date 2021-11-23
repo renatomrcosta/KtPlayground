@@ -21,7 +21,7 @@ private fun CoroutineScope.createProducerManual(): ReceiveChannel<Int> {
     return channel
 }
 
-@ExperimentalCoroutinesApi
+@OptIn(ExperimentalCoroutinesApi::class)
 private fun CoroutineScope.createProducer(): ReceiveChannel<Int> = produce<Int> {
     var x = 1
     while (isActive) {

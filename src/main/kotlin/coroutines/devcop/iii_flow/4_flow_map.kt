@@ -13,36 +13,46 @@ import util.withExecutionTime
 private data class MyWeirdDTO(val amount: Long) {}
 
 private suspend fun Int.toMyWeirdDTO(): MyWeirdDTO {
-    delay(1000)
     return MyWeirdDTO(amount = this.toLong())
 }
 
 fun main() {
     withExecutionTime {
-        runBlocking(Dispatchers.IO) {
+        runBlocking(Dispatchers.Default) {
             trace("NORMAL LIST")
             (1..5)
                 .toList()
                 .map {
                     trace("mapping value $it")
+                    delay(1000)
                     it.toMyWeirdDTO()
+                }
+                .map {
+                    trace("mapping value somehow again $it")
+                    delay(1000)
+                    it
                 }.forEach { trace(it) }
         }
     }
     trace("------")
 
     withExecutionTime {
-        runBlocking(Dispatchers.IO) {
+        runBlocking(Dispatchers.Default) {
             trace("FLOWS GO HERE NOW")
             (1..5)
                 .asFlow()
                 .buffer()
                 .map {
                     trace("mapping flow value $it")
+                    delay(1000)
                     it.toMyWeirdDTO()
                 }
                 .buffer()
-                .collect {
+                .map {
+                    trace("mapping flow somehow again value $it")
+                    delay(1000)
+                    it
+                }.collect {
                     trace(it)
                 }
         }

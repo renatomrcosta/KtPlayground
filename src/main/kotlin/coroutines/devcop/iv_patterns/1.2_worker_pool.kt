@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import util.client.singletonHttpWorkClient
+import util.client.WorkClient
 import util.trace
 
 private class WorkerPool<T, U>(
@@ -41,7 +41,7 @@ private class WorkerPool<T, U>(
 private data class Worker<T>(val id: Int, val value: T)
 
 private suspend fun doSquare(value: Int): Int = coroutineScope {
-    singletonHttpWorkClient.doRemoteWork(100)
+    WorkClient.doRemoteWork(100)
     value * value
 }
 
@@ -52,7 +52,7 @@ fun main() =
 
         launch {
             trace("Launching Workers")
-            pool.launchWorkers(64) { worker ->
+            pool.launchWorkers(2) { worker ->
                 val result = doSquare(worker.value)
                 trace("WORKERID: ${worker.id} || Result $result")
                 result
