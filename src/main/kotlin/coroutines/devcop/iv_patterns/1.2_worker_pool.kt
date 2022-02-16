@@ -52,7 +52,7 @@ fun main() =
 
         launch {
             trace("Launching Workers")
-            pool.launchWorkers(2) { worker ->
+            pool.launchWorkers(4) { worker ->
                 val result = doSquare(worker.value)
                 trace("WORKERID: ${worker.id} || Result $result")
                 result
