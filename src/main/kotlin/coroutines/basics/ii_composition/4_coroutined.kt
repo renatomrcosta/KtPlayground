@@ -7,6 +7,7 @@ import kotlinx.coroutines.runBlocking
 import util.withExecutionTime
 
 private suspend fun fetchUsageInformation(websiteId: String): String = coroutineScope {
+    println("Welcome to my nice function!")
     delay(100)
     "Imagine some meaningful content we derive based on a website"
 }

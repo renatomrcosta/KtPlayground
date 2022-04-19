@@ -1,0 +1,14 @@
+@startuml
+
+
+service -> "Website Service" : fetch website information (websiteId)
+service <-- "Website Service" : response
+
+service -> "Versioning Service" : fetch version information (websiteId)
+service <-- "Versioning Service" : response
+
+Database db as "Compiled Report Database"
+service -> db : Compile report and save to DB
+
+
+@enduml
