@@ -25,7 +25,7 @@ private suspend fun measureTimeSample() {
         val result = slowFunction()
         trace("SlowFunction Result = $result")
     }
-    trace("Duration was ${duration.inMilliseconds}ms")
+    trace("Duration was ${duration.inWholeMilliseconds}ms")
 }
 
 @ExperimentalTime
@@ -34,5 +34,5 @@ private suspend fun measureTimedValueSample() {
         slowFunction()
     }
     trace("SlowFunction Result = $result")
-    trace("Duration was ${duration.inMilliseconds}ms")
+    trace("Duration was ${duration.inWholeMilliseconds}ms")
 }

@@ -10,8 +10,8 @@ fun main() = runBlocking<Unit> {
     launch {
         println("No context defined. Uses parent context: Thread Name: ${getThreadName()}")
     }
-    launch(Dispatchers.Unconfined) { // This shouldn't be used
-        println("Unconfined coroutine: Thread Name: ${getThreadName()}")
+    launch(Dispatchers.Main) {
+        println("Main thread: Thread Name: ${getThreadName()}")
     }
     launch(Dispatchers.Default) {
         println("Default Coroutine: Thread Name: ${getThreadName()}")
